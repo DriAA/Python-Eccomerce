@@ -1,0 +1,142 @@
+{% include 'header.html' %}
+
+
+<div class="container my-5">
+    <div class="row row-cols-1 row-cols-md-2  ">
+        <div class="col p-0 m-0">
+            <img class='img-fluid w-100' src="{{product[1]}}" alt="...">
+        </div>
+        <div class="col p-5">
+            <section class="mb-3">
+                <h1 class="display-5 fw-bold ">{{product[2]}}</h1>
+                <p class="d-block text-muted fs-4 lead mb-2">{{product[4]}}</p>
+                <p class=" fw-bold fs-6 mb-2">${{product[5]}}.00</p>
+            </section>
+            <section class="mb-3">
+                <h5 class="fw-bold">Sizes:</h5>
+                <div class="row row-cols-6 row-cols-md-3 text-center ">
+                    <div class="col p-1">
+                        {%if product[9] != 0 %}
+                            <div class="border btn-size p-2">
+                                XS
+                            </div>
+                        {% else %}
+                            <div class="border btn-disabled p-2">
+                                XS
+                            </div>
+                        {% endif %}
+
+                    </div>
+                    <div class="col p-1">
+                        {%if product[10] != 0 %}
+                            <div class="border btn-size p-2">
+                                SM
+                            </div>
+                        {% else %}
+                            <div class="border btn-disabled p-2">
+                                SM
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="col p-1">
+                        {%if product[11] != 0 %}
+                            <div class="border btn-size p-2">
+                                MD
+                            </div>
+                        {% else %}
+                            <div class="border btn-disabled p-2">
+                                MD
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="col p-1">
+                        {%if product[12] != 0 %}
+                            <div class="border btn-size p-2">
+                                LG
+                            </div>
+                        {% else %}
+                            <div class="border btn-disabled p-2">
+                                LG
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="col p-1">
+                        {%if product[13] != 0 %}
+                            <div class="border btn-size p-2">
+                                XL
+                            </div>
+                        {% else %}
+                            <div class="border btn-disabled p-2">
+                                XL
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="col p-1">
+                        {%if product[14] != 0 %}
+                            <div class="border btn-size p-2">
+                                XXL
+                            </div>
+                        {% else %}
+                            <div class="border btn-disabled p-2">
+                                XXL
+                            </div>
+                        {% endif %}
+                    </div>
+
+                </div>
+                <div class="row rows-col-6">
+                    <div class="col xs">xs: {{product[9]}}</div>
+                    <div class="col sm">sm: {{product[10]}}</div>
+                    <div class="col md">md: {{product[11]}}</div>
+                    <div class="col lg">lg: {{product[12]}}</div>
+                    <div class="col xl">xl: {{product[13]}}</div>
+                    <div class="col xxl">xxl: {{product[14]}}</div>
+
+                </div>
+            </section>
+            <section class="mb-3">
+                <form action="/collection/item/{{product[0]}}" method="post">
+                    <input type="text" class="d-none form-control" name="productID" value="{{product[0]}}">
+                    <select class="form-select d-none" name="size" id="add-cart" aria-label="Default select example">
+                        <option class="none" selected>None</option>
+                        <option class="xs" value="xs">xs</option>
+                        <option class="sm" value="sm">sm</option>
+                        <option class="md" value="md">md</option>
+                        <option class="lg" value="lg">lg</option>
+                        <option class="xl" value="xl">xl</option>
+                        <option class="xxl" value="xxl">xxl</option>
+                      </select>
+                      <button type="submit" class="btn d-block w-100 btn-add-size" disabled>Add to Bag</button>
+                </form>
+
+
+            </section>
+        </div>
+    </div>
+</div>
+
+<div class="bg-light">
+    <div class="container">
+        <div class="row row-cols-1 row-cols-md-2">
+            <div class="col p-5 border-end">
+                <div class="h5 fs-5">Details</div>
+                <p class="lead">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolor magni illo non! Vitae quos cumque adipisci enim consequatur sapiente velit quidem in id mollitia suscipit minus, consectetur modi amet nostrum?</p>
+            </div>
+            <div class="col p-5">
+                <div class="h5 fs-5">About the brand</div>
+                <p class="lead">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolor magni illo non! Vitae quos cumque adipisci enim consequatur sapiente velit quidem in id mollitia suscipit minus, consectetur modi amet nostrum?</p>             
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+<script src="{{ url_for('static', filename='addItem.js') }} "></script>
+
+{% include 'footer.html' %}
