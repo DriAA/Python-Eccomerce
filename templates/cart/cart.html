@@ -1,0 +1,203 @@
+{% include 'headers/cart/header.html' %}
+
+{% if not cart %}
+<div class="container" style="min-height: 75vh;">
+  <div class="m-auto py-5">
+    <p class="lead fs-4 fw-bold">YOUR CART</p>
+    <p class="lead fs-5">No Items are currently in cart.</p> 
+  </div>
+  <section class="mt-5">
+    <p class="fw-bold fs-4">Items You Might Like</p>
+    <div class="row row-cols-3 row-cols-md-3 row-cols-lg-6 g-4">
+      {%for product in w_suggestions %}
+      <div class="col" >
+        <a  href="/collection/item/{{product[0]}}" class="text-decoration-none text-dark" >
+            <div class="card border-0 h-100">
+                <img
+                  src="{{product[1]}}"
+                  class="card-img-top" alt="...">
+                <div class="card-body pt-2 p-0">
+                    <div class="row">
+                        <div class="col m-auto">
+                            <p class="m-0 fs-6 text-nowarp">{{product[2]}}</p> <span class="d-block text-muted fs-7 lead">{{product[4]}}</span>
+                        </div>
+                        <div class="col-12 col-md-6 text-sm-start text-md-end fit-content">
+                            <span class=" fw-bold fs-6">${{product[5]}}.00</span>
+                        </div>
+                    </div>
+                </div>
+              </div>
+        </a>
+      </div>
+      {% endfor %}
+      {%for product in m_suggestions %}
+      <div class="col" >
+        <a  href="/collection/item/{{product[0]}}" class="text-decoration-none text-dark" >
+            <div class="card border-0 h-100">
+                <img
+                  src="{{product[1]}}"
+                  class="card-img-top" alt="...">
+                <div class="card-body pt-2 p-0">
+                    <div class="row">
+                        <div class="col m-auto">
+                            <p class="m-0 fs-6 text-nowarp">{{product[2]}}</p> <span class="d-block text-muted fs-7 lead">{{product[4]}}</span>
+                        </div>
+                        <div class="col-12 col-md-6 text-sm-start text-md-end fit-content">
+                            <span class=" fw-bold fs-6">${{product[5]}}.00</span>
+                        </div>
+                    </div>
+                </div>
+              </div>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+
+
+
+
+
+</div>
+{% else %}
+<div class="container">
+  <div class="row row-cols-1 row-cols-md-2 g-2">
+    <div class="col">
+      <div class="p-3">
+        {%for item in cart:%}
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <div class="card mb-3">
+              <div class="row g-0">
+                <div class="col-md-4">
+                  <img src="{{item[6]}}" class="img-fluid rounded-start" alt="None">
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h5 class="fs-5 fw-bold">{{item[7]}}</h5>
+                    <div class="row">
+                      <div class="col-6">
+                        <p class="m-0 text-muted">Size: {{item[3]}}</p>
+                        <p class="m-0 text-muted">{{item[9]}}</p>
+                        <p class="m-0 text-muted">Qty:{{item[4]}}</p>
+                      </div>
+                      <div class="col-6 text-end">
+                        <p class="m-0 fw-bold">$ {{item[10] * item[4]}}.00</p>
+                      </div>
+                    </div>
+                    <div class="card-text">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+        {%endfor%}
+      </div>
+    </div>
+    <!-- Payment Processing -->
+    <div class="col">
+      <div class="p-3">
+        <!-- Total -->
+        <div class="row">
+          <div class="col-12 mb-1">
+            <div class="row justify-content-between">
+              <div class="col-4">
+                <p class="m-0">Subtotal:</p>
+              </div>
+              <div class="col-4">
+                <p class="m-0">$00.00</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 mb-1">
+            <div class="row justify-content-between">
+              <div class="col-4">
+                <p class="m-0">Estimated Shipping:</p>
+              </div>
+              <div class="col-4">
+                <p class="m-0">$00.00</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 border-bottom mb-3 pb-2">
+            <div class="row justify-content-between">
+              <div class="col-4">
+                <p class="m-0">Estimates Sales Tax:</p>
+              </div>
+              <div class="col-4">
+                <p class="m-0">$00.00</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 mb-5">
+            <div class="row justify-content-between">
+              <div class="col-4">
+                <p class="m-0 fw-bold">Total:</p>
+              </div>
+              <div class="col-4">
+                <p class="m-0">$00.00</p>
+              </div>
+            </div>
+          </div>
+        </div>
+          <div class="row g-3">
+            <!-- Payment Process -->
+            <div class="col-12">
+              <form id="payment-form">
+              <!-- Shipping Address -->
+              <div class="row g-3">
+                <div class="col-12">
+                  <label for="inputAddress" class="form-label">Address</label>
+                  <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+                </div>
+                <div class="col-12">
+                  <label for="inputAddress2" class="form-label">Address 2</label>
+                  <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+                </div>
+                <div class="col-md-6">
+                  <label for="inputCity" class="form-label">City</label>
+                  <input type="text" class="form-control" id="inputCity">
+                </div>
+                <div class="col-md-4">
+                  <label for="inputState" class="form-label">State</label>
+                  <select id="inputState" class="form-select">
+                    <option selected>Choose...</option>
+                    <option>...</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <!-- Display a payment form -->
+                <div id="payment-element">
+                  <div class="w-100 text-center p-5 " id="spinner-container">
+                    <div class="spinner-border" role="status">
+                      <span class="sr-only"></span>
+                    </div>
+                  </div>
+                  <!--Stripe.js injects the Payment Element-->
+                </div>
+                <button id="submit" class="stripe-button">
+                  <div class="spinner hidden" id="spinner"></div>
+                  <span id="button-text">Pay now</span>
+                </button>
+                <div id="payment-message" class="hidden"></div>
+              </form>
+            </div>
+          </div>
+
+
+
+      </div>
+    </div>
+  </div>
+</div>
+{% endif%}
+
+
+
+
+
+{% include 'headers/main/footer.html' %}
